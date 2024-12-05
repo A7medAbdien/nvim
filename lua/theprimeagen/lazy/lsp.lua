@@ -39,7 +39,6 @@ return {
             opt = {
                 auto_install = true
             },
-            ensure_installed = {'ts_ls'},
             handlers = {
                 function(server_name)
                     require('lspconfig')[server_name].setup({

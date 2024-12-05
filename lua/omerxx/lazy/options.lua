@@ -24,7 +24,7 @@ vim.wo.signcolumn = 'yes'
 
 -- Set colorscheme
 --vim.cmd [[colorscheme onedark]]
-vim.cmd.colorscheme "catppuccin"
+-- vim.cmd.colorscheme "catppuccin"
 
 --vim.cmd()
 vim.opt.clipboard = 'unnamedplus'
@@ -39,6 +39,6 @@ vim.o.conceallevel=2
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+-- vim.g.mapleader = ' '
+-- vim.g.maplocalleader = ' '
 

@@ -1,21 +1,7 @@
--- Install lazylazy
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
-
 -- Fixes Notify opacity issues
 vim.o.termguicolors = true
 
-require('lazy').setup({
+return {
   {
     'MeanderingProgrammer/markdown.nvim',
     main = "render-markdown",
@@ -23,11 +9,11 @@ require('lazy').setup({
     name = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you use the mini.nvim suite
   },
-  {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
-    dependencies = { "nvim-lua/plenary.nvim" }
-  },
+--  {
+--    "ThePrimeagen/harpoon",
+--    branch = "harpoon2",
+--    dependencies = { "nvim-lua/plenary.nvim" }
+--  },
   {
     "mistricky/codesnap.nvim",
     build = "make",
@@ -82,10 +68,10 @@ require('lazy').setup({
   --   },
   --   config = function()
   --     require("nvim-tree").setup({
-  --       vim.api.nvim_set_keymap("n", "ff", ":NvimTreeToggle<enter>", { noremap=false }) 
-  --       -- vim.keymap.set("n", "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Toggle file explorer on current file" }) 
-  --       -- vim.keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse file explorer" }) 
-  --       -- vim.keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" }) 
+  --       vim.api.nvim_set_keymap("n", "ff", ":NvimTreeToggle<enter>", { noremap=false })
+  --       -- vim.keymap.set("n", "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Toggle file explorer on current file" })
+  --       -- vim.keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse file explorer" })
+  --       -- vim.keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" })
   --     })
   --   end,
   -- },
@@ -114,7 +100,7 @@ require('lazy').setup({
         force_close = true, -- passed into vim.api.nvim_win_close's second argument. See :h nvim_win_close
         bufhidden = "wipe", -- the bufhidden option to set on the floating window. See :h bufhidden
         stack_floating_preview_windows = true, -- Whether to nest floating windows
-        preview_window_title = { enable = true, position = "left" }, -- Whether 
+        preview_window_title = { enable = true, position = "left" }, -- Whether
       }
     end
   },
@@ -282,7 +268,7 @@ require('lazy').setup({
   'nvim-lualine/lualine.nvim', -- Fancier statusline
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
   {
-    'numToStr/Comment.nvim', -- "gc" to comment visual regions/lines 
+    'numToStr/Comment.nvim', -- "gc" to comment visual regions/lines
     event = { "BufRead", "BufNewFile" },
     config = true
   },
@@ -302,4 +288,4 @@ require('lazy').setup({
       -- refer to the configuration section below
     }
   },
-})
+}

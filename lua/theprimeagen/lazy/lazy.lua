@@ -172,7 +172,7 @@ return {
 
   'ray-x/go.nvim',
   'ray-x/guihua.lua',
-  { "catppuccin/nvim",                     as = "catppuccin" },
+  { "catppuccin/nvim", as = "catppuccin" },
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
@@ -217,28 +217,28 @@ return {
           ['<C-d>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
           ['<C-Space>'] = cmp.mapping.complete(),
-          ['<CR>'] = cmp.mapping.confirm {
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
-          },
-          ['<Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            else
-              fallback()
-            end
-          end, { 'i', 's' }),
-          ['<S-Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { 'i', 's' }),
+          --          ['<CR>'] = cmp.mapping.confirm {
+          --            behavior = cmp.ConfirmBehavior.Replace,
+          --            select = true,
+          --          },
+          --          ['<Tab>'] = cmp.mapping(function(fallback)
+          --            if cmp.visible() then
+          --              cmp.select_next_item()
+          --            elseif luasnip.expand_or_jumpable() then
+          --              luasnip.expand_or_jump()
+          --            else
+          --              fallback()
+          --            end
+          --          end, { 'i', 's' }),
+          --          ['<S-Tab>'] = cmp.mapping(function(fallback)
+          --            if cmp.visible() then
+          --              cmp.select_prev_item()
+          --            elseif luasnip.jumpable(-1) then
+          --              luasnip.jump(-1)
+          --            else
+          --              fallback()
+          --            end
+          --          end, { 'i', 's' }),
         },
         sources = {
           { name = 'nvim_lsp' },
@@ -259,9 +259,40 @@ return {
     }
   },
 
+  -- DAP
   {
     "rcarriga/nvim-dap-ui",
-    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" }
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+    config = function()
+      local dap = require("dap")
+      local dapui = require("dapui")
+      dapui.setup()
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close()
+      end
+    end
+  },
+  {
+    "mfussenegger/nvim-dap",
+  },
+  {
+    "mfussenegger/nvim-dap-python",
+    ft = "python",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "rcarriga/nvim-dap-ui",
+      "nvim-neotest/nvim-nio",
+    },
+    config = function(_, opts)
+      local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
+      require("dap-python").setup(path)
+    end,
   },
   'theHamsta/nvim-dap-virtual-text',
   'leoluz/nvim-dap-go',

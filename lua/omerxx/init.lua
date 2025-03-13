@@ -15,5 +15,3 @@ require('omerxx.lazy.plugins.zenmode')
 require('omerxx.lazy.plugins.neogit')
 require('omerxx.lazy.plugins.codesnap')
 -- require('omerxx.lazy.plugins.harpoon')
-
--- vim: ts=8 sts=2 sw=2 et

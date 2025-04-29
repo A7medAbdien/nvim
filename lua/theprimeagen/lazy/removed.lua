@@ -13,6 +13,7 @@ return {
   --  },
   {
     "NeogitOrg/neogit",
+    tag = "0.0.1'",
     lazy = false,
     dependencies = {
       "nvim-lua/plenary.nvim",         -- required

@@ -71,6 +71,19 @@ return {
         local cmp = require('cmp')
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
+        -- Custom function to position documentation window at top-left
+        local function custom_documentation_config()
+            return {
+                winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu',
+                max_width = 60,
+                max_height = 15,
+                -- Use a custom function to position the window
+                get_position = function()
+                    return { row = 2, col = 2 }  -- Top-left of screen
+                end,
+            }
+        end
+
         cmp.setup({
             sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
@@ -78,11 +91,31 @@ return {
             }, {
                 { name = 'buffer' },
             }),
+            window = {
+                completion = {
+                    border = 'none',
+                    --winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None',
+                },
+                documentation = {
+                    border = 'none',
+                    --winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu',
+                    max_width = 60,
+                    max_height = 15,
+                    -- Position the documentation window at top-left using absolute position
+                    anchor = 'NW',
+                    row = 1,
+                    col = 1,
+                },
+            },
             mapping = cmp.mapping.preset.insert({
                 ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
                 ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
                 ['<Tab>'] = cmp.mapping.confirm({ select = true }),
                 ['<C-Space>'] = cmp.mapping.complete(),
+                -- Add manual documentation toggle
+                -- ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+                -- ['<C-f>'] = cmp.mapping.scroll_docs(4),
+                -- ['<C-e>'] = cmp.mapping.close(),
             }),
             snippet = {
                 expand = function(args)
@@ -90,5 +123,19 @@ return {
                 end,
             },
         })
+
+        -- Hook into the documentation window creation to force positioning
+        local original_open_float = vim.lsp.util.open_floating_preview
+        vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
+            opts = opts or {}
+            -- Force position to top-left for documentation windows
+            if opts.max_width and opts.max_width <= 60 then
+                opts.anchor = 'NW'
+                opts.row = 1
+                opts.col = 1
+                opts.relative = 'editor'
+            end
+            return original_open_float(contents, syntax, opts, ...)
+        end
     end
 }

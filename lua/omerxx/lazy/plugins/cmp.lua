@@ -1,4 +1,5 @@
-require('cmp').setup {
+-- DISABLED: Using cmp config from theprimeagen.lazy.lsp instead
+-- require('cmp').setup {
     config = function()
       -- nvim-cmp setup
       local cmp = require 'cmp'
@@ -45,7 +46,7 @@ require('cmp').setup {
           { name = 'luasnip' },
           { name = "neorg" },
         },
-      })
-    end
-}
+      -- })
+    -- end
+-- }
 

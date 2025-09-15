@@ -9,6 +9,7 @@ require('omerxx.lazy.plugins.gitsigns')
 require('omerxx.lazy.plugins.tele')
 require('omerxx.lazy.plugins.treesitter')
 require('omerxx.lazy.plugins.lsp')
+-- Note: cmp.lua is handled by theprimeagen.lazy.lsp instead
 require('omerxx.lazy.plugins.trouble')
 -- require('omerxx.lazy.plugins.obsidian')
 require('omerxx.lazy.plugins.zenmode')

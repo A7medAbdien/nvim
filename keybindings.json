@@ -1,0 +1,65 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "ctrl+i",
+        "command": "composerMode.agent"
+    },
+    {
+        "key": "ctrl+k ctrl+space",
+        "command": "typescript.removeUnusedImports"
+    },
+    {
+        "key": "alt+f",
+        "command": "editor.fold",
+        "when": "vim.mode == 'Normal'"
+    },
+    {
+        "key": "alt+u",
+        "command": "editor.unfold",
+        "when": "vim.mode == 'Normal'"
+    },
+    {
+        "key": "alt+s",
+        "command": "git.commitStaged"
+    },
+    {
+        "key": "alt+p",
+        "command": "git.push"
+    },
+    {
+        "key": "alt+p",
+        "command": "-togglePreserveCase",
+        "when": "editorFocus"
+    },
+    {
+        "key": "alt+s",
+        "command": "-markdown.extension.editing.toggleStrikethrough",
+        "when": "editorTextFocus && !editorReadonly && editorLangId =~ /^markdown$|^rmd$|^quarto$/"
+    },
+    {
+        "key": "alt+c",
+        "command": "git.commit"
+    },
+    {
+        "key": "alt+c",
+        "command": "-toggleFindCaseSensitive",
+        "when": "editorFocus"
+    },
+    {
+        "key": "alt+c",
+        "command": "-toggleSearchCaseSensitive",
+        "when": "searchViewletFocus"
+    },
+    {
+        "key": "alt+u",
+        "command": "git.undoCommit"
+    },
+    {
+        "key": "shift+alt+s",
+        "command": "git.unstageAll"
+    },
+    {
+        "key": "ctrl+e",
+        "command": "composerMode.background"
+    }
+]
